@@ -1,35 +1,45 @@
 // Function for getting songs
 async function getsongs() {
+    // let response = [
+    //     {
+    //         "name": "Dinner with friends.mp3",
+    //     },
+    //     {
+    //         "name": "Nain Tere Chain Me.mp3",
 
-    let response = [
-        {
-            "name": "Dinner with friends.mp3",
-        },
-        {
-            "name": "Nain Tere Chain Me.mp3",
+    //     },
+    //     {
+    //         "name": "Samjho Na x Wishes.mp3",
 
-        },
-        {
-            "name": "Samjho Na x Wishes.mp3",
+    //     },
+    //     {
+    //         "name": "Tajdar-e-Haram.mp3",
 
-        },
-        {
-            "name": "Tajdar-e-Haram.mp3",
+    //     },
+    //     {
+    //         "name": "Tere Sang Yaara.mp3",
 
-        },
-        {
-            "name": "Tere Sang Yaara.mp3",
+    //     },
+    //     {
+    //         "name": "Zaroori Tha.mp3",
 
-        },
-        {
-            "name": "Zaroori Tha.mp3",
+    //     }
+    // ]
+   let a= await fetch("assets/songs/")
 
-        }
-    ]
-    let songs = [];
-    for (const song of response) {
-        songs.push(song.name)
+   let response= await a.text();
+   let div=document.createElement("div");
+   div.innerHTML=response;
+   let a_s=div.getElementsByTagName("a");
+   let songs = [];
+   for (let index = 0; index < a_s.length; index++) {
+    const element = a_s[index];
+    if (element.href.endsWith(".mp3")) {
+        songs.push(element.innerHTML.split("/assets/songs/"))
     }
+    
+   }
+    console.log(songs);
     return songs;
 }
 let audio = new Audio();
@@ -59,7 +69,7 @@ async function main() {
         <li>
                             <img class="invert" src="music.svg" alt="Music">
                             <div class="info">
-                                <div>${song.replaceAll("%20", " ")}</div>
+                                <div>${song}</div>
                                 <div>artist</div>
                             </div>
                             <div class="playnow">
@@ -120,3 +130,4 @@ async function main() {
     })
 }
 main();
+
