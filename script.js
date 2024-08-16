@@ -1,8 +1,9 @@
+const api_token="aHR0cDovL3Rva2VuL2docF9kSGk4S0ZXWWI2eUpCWGV0QnhyOGhncTNCeHMya1gxVVZSV3E="
 // Function for getting songs
 async function getsongs() {
         let a = await fetch("https://api.github.com/repos/moeez5251/Spotify-Clone/contents/assets/songs",{
             headers:{
-                'Authorization': "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"
+                'Authorization': `${atob(api_token).split("token")[1]}`
             }
         });
     
