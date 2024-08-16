@@ -10,7 +10,7 @@ async function getsongs() {
         let songs = [];
     for (const song of response) {
         songs.push(song.name)
-    }
+    } 
     return songs;
 }
 let audio = new Audio();
