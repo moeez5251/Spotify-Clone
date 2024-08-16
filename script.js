@@ -108,5 +108,15 @@ async function main() {
 
         audio.currentTime = currentTime;
     })
+
+    // Event listner for hamburger
+
+    document.querySelector(".hamburger").addEventListener("click",()=>{
+        document.querySelector(".left").classList.add("left-animation")
+    })
+    document.querySelector(".cross").addEventListener("click",()=>{
+        document.querySelector(".left").classList.remove("left-animation")
+
+    })
 }
 main();
