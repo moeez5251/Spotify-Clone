@@ -1,25 +1,44 @@
-const api_token="aHR0cDovL3Rva2VuL2docF9kSGk4S0ZXWWI2eUpCWGV0QnhyOGhncTNCeHMya1gxVVZSV3E="
 // Function for getting songs
 async function getsongs() {
-        let a = await fetch("https://api.github.com/repos/moeez5251/Spotify-Clone/contents/assets/songs",{
-            headers:{
-                'Authorization': `${atob(api_token).split("token")[1]}`
-            }
-        });
-    
-        let response = await a.json();
-        let songs = [];
+
+    let response = [
+        {
+            "name": "Dinner with friends.mp3",
+        },
+        {
+            "name": "Nain Tere Chain Me.mp3",
+
+        },
+        {
+            "name": "Samjho Na x Wishes.mp3",
+
+        },
+        {
+            "name": "Tajdar-e-Haram.mp3",
+
+        },
+        {
+            "name": "Tere Sang Yaara.mp3",
+
+        },
+        {
+            "name": "Zaroori Tha.mp3",
+
+        }
+    ]
+    let songs = [];
     for (const song of response) {
         songs.push(song.name)
-    } 
+    }
     return songs;
 }
 let audio = new Audio();
-let playmusic = (e) => {
+let playmusic = (e, a = false) => {
     audio.src = "/assets/songs/" + e
     audio.play();
     play.classList.remove("fa-play");
     play.classList.add("fa-pause");
+
     document.querySelector(".songinfo").innerHTML = decodeURI(e);
     document.querySelector(".songtime").innerHTML = "00:00/00:00";
 }
@@ -44,10 +63,10 @@ async function main() {
                                 <div>artist</div>
                             </div>
                             <div class="playnow">
-                                <span>Play Now</span>
-                                <img style="width: 25px;" class="invert" src="playing.svg" alt="Play">
+                            <span>Play Now</span>
+                            <img style="width: 25px;" class="invert" src="playing.svg" alt="Play">
                             </div>
-                        </li>`;
+                            </li>`;
     }
     //Play Songs
     document.querySelectorAll(".songlists>ul>li").forEach(e => {
@@ -73,6 +92,21 @@ async function main() {
     // Time Updation
     audio.addEventListener("timeupdate", () => {
         document.querySelector(".songtime").innerHTML = `${convertSeconds(audio.currentTime)}/${convertSeconds(audio.duration)}`;
+        document.querySelector(".circle").style.left = `${(audio.currentTime / audio.duration) * 100}%`//Circle Updation
+    })
+
+    // Event listner for seekbar
+    document.querySelector(".seekbar").addEventListener("click", e => {
+
+        const totalWidth = document.querySelector(".seekbar").offsetWidth;
+        const circle = document.querySelector(".circle");
+        circle.style.left = `${e.offsetX}px`;
+
+        const percentage = (e.offsetX / totalWidth) * 100;
+
+        const currentTime = (percentage / 100) * audio.duration;
+
+        audio.currentTime = currentTime;
     })
 }
 main();
