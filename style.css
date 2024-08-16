@@ -311,6 +311,7 @@ body {
     top: 22px;
     width: 35px;
     cursor: pointer;
+    display: none;
 }
 @media screen and (max-width:1350px) {
     .left{
@@ -328,5 +329,8 @@ body {
  }  
  .left-animation{
     left: 0%;
+}
+.cross{
+    display: block;
 }
 }
