@@ -1,18 +1,16 @@
 // Function for getting songs
 async function getsongs() {
-
-    let a = await fetch("http://127.0.0.1:3000/assets/songs/");
-    let response = await a.text();
-    let div = document.createElement("div");
-    div.innerHTML = response;
-    let a_tag = div.getElementsByTagName("a");
-    let songs = [];
-    for (let index = 0; index < a_tag.length; index++) {
-        const element = a_tag[index];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/assets/songs/")[1]);// Split because only name required
-        }
-    }
+        let a = await fetch("https://api.github.com/repos/moeez5251/Spotify-Clone/contents/assets/songs",{
+            headers:{
+                'Authorization': "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"
+            }
+        });
+    
+        let response = await a.json();
+        let songs = [];
+    for (const song of response) {
+        songs.push(song.name)
+    } 
     return songs;
 }
 let audio = new Audio();
@@ -52,7 +50,7 @@ async function main() {
     }
     //Play Songs
     document.querySelectorAll(".songlists>ul>li").forEach(e => {
-        e.addEventListener("click", element => {
+        e.addEventListener("click", () => {
             playmusic(e.querySelector(".info").firstElementChild.innerHTML)
         })
     })
