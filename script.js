@@ -25,7 +25,7 @@ async function getsongs() {
 
         }
     ]
-    let songs=[];
+    let songs = [];
     for (const song of response) {
         songs.push(song.name)
     }
@@ -42,6 +42,9 @@ let playmusic = (e, a = false) => {
     document.querySelector(".songtime").innerHTML = "00:00/00:00";
 }
 function convertSeconds(totalSeconds) {
+    if (isNaN(totalSeconds)) {
+        return "00:00";
+    }
     totalSeconds = Math.round(totalSeconds);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
@@ -108,15 +111,72 @@ async function main() {
         audio.currentTime = currentTime;
     })
 
-    // Event listner for hamburger
+    // Event listner for hamburger open
 
-    document.querySelector(".hamburger").addEventListener("click",()=>{
+    document.querySelector(".hamburger").addEventListener("click", () => {
         document.querySelector(".left").classList.add("left-animation")
     })
-    document.querySelector(".cross").addEventListener("click",()=>{
+    // Event listner for hamburger close
+    document.querySelector(".cross").addEventListener("click", () => {
         document.querySelector(".left").classList.remove("left-animation")
 
     })
+
+
+    // Event listner for previous and next
+    document.getElementById("previous").addEventListener("click", () => {
+        let index = songs.indexOf(decodeURI(audio.src.split("/assets/songs/")[1]));
+        if ((index - 1) >= 0) {
+            playmusic(songs[index - 1])
+        }
+    })
+    document.getElementById("next").addEventListener("click", () => {
+        let index = songs.indexOf(decodeURI(audio.src.split("/assets/songs/")[1]));
+        if ((index + 1) < songs.length) {
+            playmusic(songs[index + 1])
+        }
+    })
+
+
+        // Volume Change
+
+    document.querySelector(".range").addEventListener("change",(e)=>{
+        audio.volume=parseInt(e.target.value)/100;
+    })
+
+
+
+
+
+
+
+    // Media Query Handle
+
+    const media_query_380 = window.matchMedia('(max-width:380px)');
+    function media_380(event) {
+        if (event.matches) {
+            document.querySelectorAll(".playnow").forEach(e => {
+                e.style.display = "none";
+            })
+        }
+        else {
+            document.querySelectorAll(".playnow").forEach(e => {
+                e.style.display = "block";
+                e.style.display="flex";
+                e.style.justifyContent="center";
+                e.style.alignItems="center";
+            })
+
+
+        }
+
+    }
+    media_380(media_query_380);
+    media_query_380.addEventListener('change', media_380);
+
 }
 main();
+
+
+
 
