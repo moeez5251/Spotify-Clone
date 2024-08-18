@@ -456,8 +456,8 @@ body {
     .volume,.vol{
         gap: 10px;
     }
-    .playbar {
-        bottom: 7vh;
+    .container-main {
+        height: 90vh;
 
     }
 }
