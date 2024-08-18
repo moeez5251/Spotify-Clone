@@ -1,39 +1,6 @@
-// Function for getting songs
-async function getsongs() {
-    let response = [
-        {
-            "name": "Dinner with friends.mp3",
-        },
-        {
-            "name": "Nain Tere Chain Me.mp3",
-
-        },
-        {
-            "name": "Samjho Na x Wishes.mp3",
-
-        },
-        {
-            "name": "Tajdar-e-Haram.mp3",
-
-        },
-        {
-            "name": "Tere Sang Yaara.mp3",
-
-        },
-        {
-            "name": "Zaroori Tha.mp3",
-
-        }
-    ]
-    let songs = [];
-    for (const song of response) {
-        songs.push(song.name)
-    }
-    return songs;
-}
 let audio = new Audio();
-let playmusic = (e, a = false) => {
-    audio.src = "/assets/songs/" + e
+let playmusic = (e, name) => {
+    audio.src = `/assets/songs/${name}/` + e
     audio.play();
     play.classList.remove("fa-play");
     play.classList.add("fa-pause");
@@ -53,29 +20,45 @@ function convertSeconds(totalSeconds) {
     return `${formattedMinutes}:${formattedSeconds}`;
 }
 async function main() {
-    let songs = await getsongs();
-    // Play List
-    let song_ul = document.querySelector(".songlists").getElementsByTagName("ul")[0];
-    for (const song of songs) {
-        song_ul.innerHTML += `
-        <li>
-                            <img class="invert" src="music.svg" alt="Music">
-                            <div class="info">
-                                <div>${song}</div>
-                                <div>artist</div>
-                            </div>
-                            <div class="playnow">
-                            <span>Play Now</span>
-                            <img style="width: 25px;" class="invert" src="playing.svg" alt="Play">
-                            </div>
-                            </li>`;
-    }
-    //Play Songs
-    document.querySelectorAll(".songlists>ul>li").forEach(e => {
+    let songs = {
+        album1: ["assets/songs/Atif-Aslam/Tajdar-e-Haram.mp3", "assets/songs/Atif-Aslam/Tere Sang Yaara.mp3","assets/songs/Atif-Aslam/Dil Diyan Gallan.mp3"],
+        album2:["assets/songs/Rahat-Fateh-Ali-Khan/Zaroori Tha.mp3","assets/songs/Rahat-Fateh-Ali-Khan/Dost Banke.mp3","assets/songs/Rahat-Fateh-Ali-Khan/Jag Ghoomeya.mp3"],
+        album3:["assets/songs/Punjabi-Songs/Nain Tere Chain Me.mp3","assets/songs/Punjabi-Songs/Samjho Na x Wishes.mp3","assets/songs/Punjabi-Songs/Kinne Aa Piche Laaye.mp3"],
+        album4:["assets/images/Sidhu-moose-wala/Dollar  Dakuaan Da.mp3","assets/images/Sidhu-moose-wala/kaliya ne Rata.mp3","assets/images/Sidhu-moose-wala/Same Beef.mp3"]
+    };
+    document.querySelectorAll(".card").forEach(e => {
         e.addEventListener("click", () => {
-            playmusic(e.querySelector(".info").firstElementChild.innerHTML)
+            let a = songs[e.getAttribute("data-album")];
+            album=e.getAttribute("data-album");
+            let song_ul = document.querySelector(".songlists").getElementsByTagName("ul")[0];
+            song_ul.innerHTML = "";
+            for (const song of a) {
+                song_ul.innerHTML += `
+                    <li data-name=${song.split("/")[2]} >
+                                        <img class="invert" src="music.svg" alt="Music">
+                                        <div class="info" >
+                                            <div >${song.split("/")[3]}</div>
+                                            <div >${song.split("/")[2]}</div>
+                                        </div>
+                                        <div class="playnow">
+                                        <span>Play Now</span>
+                                        <img style="width: 25px;" class="invert" src="playing.svg" alt="Play">
+                                        </div>
+                                        </li>`;
+
+            }
+
+            document.querySelectorAll(".songlists>ul>li").forEach(e => {
+                e.addEventListener("click", () => {
+                    playmusic(e.querySelector(".info").firstElementChild.innerHTML, e.getAttribute("data-name"))
+                })
+            })
         })
     })
+
+    document.querySelector(".card").click();
+    //Play Songs
+
 
     let play = document.getElementById("play");
     play.addEventListener("click", () => {
@@ -123,29 +106,29 @@ async function main() {
     })
 
 
-    // Event listner for previous and next
-    document.getElementById("previous").addEventListener("click", () => {
-        let index = songs.indexOf(decodeURI(audio.src.split("/assets/songs/")[1]));
-        if ((index - 1) >= 0) {
-            playmusic(songs[index - 1])
+
+    // Volume Change
+
+    document.querySelector(".range").addEventListener("change", (e) => {
+        audio.volume = parseInt(e.target.value) / 100;
+    })
+
+
+    // Event listner for volume
+
+    document.querySelector(".volume>img").addEventListener("click", (e) => {
+        if (e.target.src.split("/")[3] == "volume.svg") {
+            e.target.src = "mute.svg";
+            audio.volume = 0;
+            document.querySelector("#range").value = 0;
+        }
+        else {
+            e.target.src = "volume.svg";
+            audio.volume = 1;
+            document.querySelector("#range").value = 10;
+
         }
     })
-    document.getElementById("next").addEventListener("click", () => {
-        let index = songs.indexOf(decodeURI(audio.src.split("/assets/songs/")[1]));
-        if ((index + 1) < songs.length) {
-            playmusic(songs[index + 1])
-        }
-    })
-
-
-        // Volume Change
-
-    document.querySelector(".range").addEventListener("change",(e)=>{
-        audio.volume=parseInt(e.target.value)/100;
-    })
-
-
-
 
 
 
@@ -162,9 +145,9 @@ async function main() {
         else {
             document.querySelectorAll(".playnow").forEach(e => {
                 e.style.display = "block";
-                e.style.display="flex";
-                e.style.justifyContent="center";
-                e.style.alignItems="center";
+                e.style.display = "flex";
+                e.style.justifyContent = "center";
+                e.style.alignItems = "center";
             })
 
 
