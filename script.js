@@ -53,6 +53,28 @@ async function main() {
                     playmusic(e.querySelector(".info").firstElementChild.innerHTML, e.getAttribute("data-name"))
                 })
             })
+
+            const media_query_380 = window.matchMedia('(max-width:380px)');
+       function media_380(event) {
+        if (event.matches) {
+            document.querySelectorAll(".playnow").forEach(e => {
+                e.style.display = "none";
+            })
+        }
+        else {
+            document.querySelectorAll(".playnow").forEach(e => {
+                e.style.display = "block";
+                e.style.display = "flex";
+                e.style.justifyContent = "center";
+                e.style.alignItems = "center";
+            })
+
+
+        }
+
+    }
+    media_380(media_query_380);
+    media_query_380.addEventListener('change', media_380);
         })
     })
 
@@ -135,27 +157,7 @@ async function main() {
 
     // Media Query Handle
 
-    const media_query_380 = window.matchMedia('(max-width:380px)');
-    function media_380(event) {
-        if (event.matches) {
-            document.querySelectorAll(".playnow").forEach(e => {
-                e.style.display = "none";
-            })
-        }
-        else {
-            document.querySelectorAll(".playnow").forEach(e => {
-                e.style.display = "block";
-                e.style.display = "flex";
-                e.style.justifyContent = "center";
-                e.style.alignItems = "center";
-            })
-
-
-        }
-
-    }
-    media_380(media_query_380);
-    media_query_380.addEventListener('change', media_380);
+    
 
 }
 main();
