@@ -21,15 +21,15 @@ function convertSeconds(totalSeconds) {
 }
 async function main() {
     let songs = {
-        album1: ["assets/songs/Atif-Aslam/Tajdar-e-Haram.mp3", "assets/songs/Atif-Aslam/Tere Sang Yaara.mp3","assets/songs/Atif-Aslam/Dil Diyan Gallan.mp3"],
-        album2:["assets/songs/Rahat-Fateh-Ali-Khan/Zaroori Tha.mp3","assets/songs/Rahat-Fateh-Ali-Khan/Dost Banke.mp3","assets/songs/Rahat-Fateh-Ali-Khan/Jag Ghoomeya.mp3"],
-        album3:["assets/songs/Punjabi-Songs/Nain Tere Chain Me.mp3","assets/songs/Punjabi-Songs/Samjho Na x Wishes.mp3","assets/songs/Punjabi-Songs/Kinne Aa Piche Laaye.mp3"],
-        album4:["assets/images/Sidhu-moose-wala/Dollar  Dakuaan Da.mp3","assets/images/Sidhu-moose-wala/kaliya ne Rata.mp3","assets/images/Sidhu-moose-wala/Same Beef.mp3"]
+        album1: ["assets/songs/Atif-Aslam/Tajdar-e-Haram.mp3", "assets/songs/Atif-Aslam/Tere Sang Yaara.mp3", "assets/songs/Atif-Aslam/Dil Diyan Gallan.mp3"],
+        album2: ["assets/songs/Rahat-Fateh-Ali-Khan/Zaroori Tha.mp3", "assets/songs/Rahat-Fateh-Ali-Khan/Dost Banke.mp3", "assets/songs/Rahat-Fateh-Ali-Khan/Jag Ghoomeya.mp3"],
+        album3: ["assets/songs/Punjabi-Songs/Nain Tere Chain Me.mp3", "assets/songs/Punjabi-Songs/Samjho Na x Wishes.mp3", "assets/songs/Punjabi-Songs/Kinne Aa Piche Laaye.mp3"],
+        album4: ["assets/images/Sidhu-moose-wala/Dollar Dakuaan Da.mp3", "assets/images/Sidhu-moose-wala/kaliya ne Rata.mp3", "assets/images/Sidhu-moose-wala/Same Beef.mp3"]
     };
     document.querySelectorAll(".card").forEach(e => {
         e.addEventListener("click", () => {
             let a = songs[e.getAttribute("data-album")];
-            album=e.getAttribute("data-album");
+            album = e.getAttribute("data-album");
             let song_ul = document.querySelector(".songlists").getElementsByTagName("ul")[0];
             song_ul.innerHTML = "";
             for (const song of a) {
@@ -53,28 +53,27 @@ async function main() {
                     playmusic(e.querySelector(".info").firstElementChild.innerHTML, e.getAttribute("data-name"))
                 })
             })
-
+            // Media Query Handle
             const media_query_380 = window.matchMedia('(max-width:380px)');
-       function media_380(event) {
-        if (event.matches) {
-            document.querySelectorAll(".playnow").forEach(e => {
-                e.style.display = "none";
-            })
-        }
-        else {
-            document.querySelectorAll(".playnow").forEach(e => {
-                e.style.display = "block";
-                e.style.display = "flex";
-                e.style.justifyContent = "center";
-                e.style.alignItems = "center";
-            })
+            function media_380(event) {
+                if (event.matches) {
+                    document.querySelectorAll(".playnow").forEach(e => {
+                        e.style.display = "none";
+                    })
+                }
+                else {
+                    document.querySelectorAll(".playnow").forEach(e => {
+                        e.style.display = "block";
+                        e.style.display = "flex";
+                        e.style.justifyContent = "center";
+                        e.style.alignItems = "center";
+                    })
 
+                }
 
-        }
-
-    }
-    media_380(media_query_380);
-    media_query_380.addEventListener('change', media_380);
+            }
+            media_380(media_query_380);
+            media_query_380.addEventListener('change', media_380);
         })
     })
 
@@ -155,9 +154,8 @@ async function main() {
 
 
 
-    // Media Query Handle
 
-    
+
 
 }
 main();
