@@ -442,6 +442,7 @@ body {
 
     .info {
         font-size: 10px;
+        text-wrap: wrap;
     }
 
     .header>* {

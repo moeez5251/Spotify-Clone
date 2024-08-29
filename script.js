@@ -25,7 +25,7 @@ async function main() {
         album2: ["assets/songs/Rahat-Fateh-Ali-Khan/Zaroori Tha.mp3", "assets/songs/Rahat-Fateh-Ali-Khan/Dost Banke.mp3", "assets/songs/Rahat-Fateh-Ali-Khan/Jag Ghoomeya.mp3"],
         album3: ["assets/songs/Punjabi-Songs/Nain Tere Chain Me.mp3", "assets/songs/Punjabi-Songs/Samjho Na x Wishes.mp3", "assets/songs/Punjabi-Songs/Kinne Aa Piche Laaye.mp3"],
         album4: ["assets/images/Sidhu-moose-wala/Dollar Dakuaan Da.mp3", "assets/images/Sidhu-moose-wala/kaliya ne Rata.mp3", "assets/images/Sidhu-moose-wala/Same Beef.mp3"],
-        album5:["assets/images/Coke-Studio/Blockbuster Coke Studio.mp3","assets/images/Coke-Studio/Jhol Coke Studio.mp3","assets/images/Coke-Studio/Pasoori Coke Studio.mp3"]
+        album5:["assets/images/Coke-Studio/Blockbuster.mp3","assets/images/Coke-Studio/Jhol Coke Studio.mp3","assets/images/Coke-Studio/Pasoori Coke Studio.mp3"]
     };
     document.querySelectorAll(".card").forEach(e => {
         e.addEventListener("click", () => {
