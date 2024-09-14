@@ -20,7 +20,7 @@ function readDirectoryRecursive(dir) {
 
     return results;
 }
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     const directoryPath = ('public/assets/songs');
         const files = readDirectoryRecursive(directoryPath);
         res.json(files);
