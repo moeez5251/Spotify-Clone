@@ -21,7 +21,7 @@ function readDirectoryRecursive(dir) {
     return results;
 }
 app.get('/', (req, res) => {
-    const directoryPath = ('assets/songs');
+    const directoryPath = ('public/assets/songs');
         const files = readDirectoryRecursive(directoryPath);
         res.json(files);
   
