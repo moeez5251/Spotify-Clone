@@ -36,14 +36,14 @@ async function main() {
             for (const song of a) {
                 song_ul.innerHTML += `
                     <li data-name=${song.split("/")[2]} >
-                                        <img class="invert" src="public/music.svg" alt="Music">
+                                        <img class="invert" src="music.svg" alt="Music">
                                         <div class="info" >
                                             <div >${song.split("/")[3]}</div>
                                             <div >${song.split("/")[2]}</div>
                                         </div>
                                         <div class="playnow">
                                         <span>Play Now</span>
-                                        <img style="width: 25px;" class="invert" src="public/playing.svg" alt="Play">
+                                        <img style="width: 25px;" class="invert" src="playing.svg" alt="Play">
                                         </div>
                                         </li>`;
 
